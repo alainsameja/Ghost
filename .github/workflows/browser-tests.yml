@@ -10,7 +10,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on:
-      labels: ubuntu-latest-4-cores
+      labels: ubuntu-latest-8-cores
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && !startsWith(github.head_ref, 'renovate/'))
     steps:
     - uses: actions/checkout@v3
