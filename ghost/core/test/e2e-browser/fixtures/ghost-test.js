@@ -56,6 +56,12 @@ module.exports = base.test.extend({
         configUtils.set('server:port', port);
         configUtils.set('url', `http://127.0.0.1:${port}`);
 
+        // Stripe limit of 5 connect accounts per second
+        const delay = ms => new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
+        await delay(200 * workerInfo.parallelIndex);
+
         const stripeAccountId = await getStripeAccountId();
         const stripeIntegrationToken = await generateStripeIntegrationToken(stripeAccountId);
 
