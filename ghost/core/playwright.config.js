@@ -6,7 +6,8 @@ const config = {
         timeout: 10000
     },
     retries: process.env.CI ? 2 : 0,
-    workers: process.env.CI ? '100%' : (process.env.PLAYWRIGHT_SLOWMO ? 1 : undefined),
+    // Limit to 5 workers to ensure we don't hit Stripe rate limits
+    workers: process.env.CI ? 5 : (process.env.PLAYWRIGHT_SLOWMO ? 1 : undefined),
     reporter: process.env.CI ? [['list', {printSteps: true}], ['html']] : [['list', {printSteps: true}]],
     use: {
         // Use a single browser since we can't simultaneously test multiple browsers
